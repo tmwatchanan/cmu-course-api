@@ -12,9 +12,9 @@
         "url": "https://github.com/tmwatchanan/reg-cmu-course-api/issues"
     },
     "dependencies": {
-        "express": "latest",
-        "request": "latest",
-        "cheerio": "latest"
+        "express": "*",
+        "request": "*",
+        "cheerio": "*"
     },
     "engines": {
         "node": "8.9.x",
