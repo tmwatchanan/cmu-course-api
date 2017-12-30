@@ -1,12 +1,23 @@
 {
-  "name": "reg-cmu-course-api",
-  "version": "0.0.1",
-  "description": "An API provides course information of Chiang Mai University",
-  "main": "server.js",
-  "author": "Watchanan Chantapakul",
-  "dependencies": {
-    "express": "latest",
-    "request": "latest",
-    "cheerio": "latest"
-  }
+    "name": "reg-cmu-course-api",
+    "version": "1.0",
+    "description": "An API provides course information of Chiang Mai University",
+    "main": "server.js",
+    "author": "Watchanan Chantapakul",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/tmwatchanan/reg-cmu-course-api.git"
+    },
+    "bugs": {
+        "url": "https://github.com/tmwatchanan/reg-cmu-course-api/issues"
+    },
+    "dependencies": {
+        "express": "latest",
+        "request": "latest",
+        "cheerio": "latest"
+    },
+    "engines": {
+        "node": "8.9.x",
+        "npm": "5.5.x"
+    }
 }
