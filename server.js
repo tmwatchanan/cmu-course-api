@@ -4,8 +4,8 @@ var request = require('request');
 var cheerio = require('cheerio');
 var app = express();
 
-app.get('/course', function (req, res) {
-    url = 'https://mis.cmu.ac.th/tqf/coursepublic.aspx?courseno=' + req.param.courseNo + '&semester=2&year=2560';
+app.get('/course/:courseNo', function (req, res) {
+    url = 'https://mis.cmu.ac.th/tqf/coursepublic.aspx?courseno=' + req.params.courseNo + '&semester=2&year=2560';
     request(url, function(error, response, html){
         if(!error){
             var $ = cheerio.load(html);
