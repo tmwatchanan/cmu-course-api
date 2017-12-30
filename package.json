@@ -1,0 +1,12 @@
+{
+  "name": "reg-cmu-course-api",
+  "version": "0.0.1",
+  "description": "An API provides course information of Chiang Mai University",
+  "main": "server.js",
+  "author": "Watchanan Chantapakul",
+  "dependencies": {
+    "express": "latest",
+    "request": "latest",
+    "cheerio": "latest"
+  }
+}
