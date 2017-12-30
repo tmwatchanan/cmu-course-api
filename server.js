@@ -4,6 +4,9 @@ var request = require('request');
 var cheerio = require('cheerio');
 var app = express();
 
+var port = process.env.PORT || 8080; // process.env.PORT lets the port be set by Heroku
+
+
 app.get('/course/:courseNo', function (req, res) {
     url = 'https://mis.cmu.ac.th/tqf/coursepublic.aspx?courseno=' + req.params.courseNo + '&semester=2&year=2560';
     request(url, function(error, response, html){
@@ -19,6 +22,7 @@ app.get('/course/:courseNo', function (req, res) {
     })
 });
 
-app.listen('8081');
-console.log('Listening requests on port 8081');
+app.listen(port, function() {
+    console.log('Listening requests on port ' + port);
+});
 exports = module.exports = app;
