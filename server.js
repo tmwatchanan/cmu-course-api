@@ -11,7 +11,6 @@ app.get('/course/:courseNo', function (req, res) {
     request(url, function(error, response, html){
         if(!error){
             var $ = cheerio.load(html);
-
             $('#lblCourseTitleEng').filter(function(){
                 var data = $(this);
                 var courseTitleEng = data.text();
