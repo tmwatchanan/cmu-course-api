@@ -4,7 +4,9 @@
   "description": "An API provides course information of Chiang Mai University",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "postinstall": "npm install"
   },
   "author": "Watchanan Chantapakul",
   "license": "ISC",
