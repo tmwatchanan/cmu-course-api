@@ -5,11 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "postinstall": "npm install"
+    "start": "node server.js"
   },
   "author": "Watchanan Chantapakul",
-  "license": "ISC",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.2",
