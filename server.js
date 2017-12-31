@@ -22,11 +22,17 @@ app.get('/course/:courseNo', function (req, res) {
     request(url, function(error, response, html){
         if(!error){
             var $ = cheerio.load(html);
+            var responseJson = {
+                courseName: '',
+                courseCredit: ''
+            };
             $('#lblCourseTitleEng').filter(function(){
-                var data = $(this);
-                var courseTitleEng = data.text();
-                return res.json(courseTitleEng);
-            })
+                responseJson.courseName = $(this).text();
+            });
+            $('#lblCredit').filter(function(){
+                responseJson.courseCredit = $(this).text().charAt(0);
+            });
+            return res.json(responseJson);
         }
     })
 });
