@@ -109,9 +109,19 @@ app.get('/cgpa-calculator', function (req, res) {
             };
 
             courses.forEach((course, index) => {
-                const creditLec = course[5].charAt(0),
-                    creditLab = course[6].charAt(0),
+                let creditLec, creditLab, type;
+                try {
+                    if (course[5] != "") {
+                        creditLec = course[5].charAt(0);
+                    }
+                    if (course[6] != "") {
+                        creditLab = course[6].charAt(0);
+                    }
                     type = course[9];
+                }
+                catch (err) {
+                    console.log("err", err);
+                }
                 const courseInformation = {
                     no: course[0],
                     courseNo: course[1],
