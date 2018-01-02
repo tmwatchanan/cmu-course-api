@@ -40,7 +40,7 @@ app.get('/course/:courseNo', function (req, res) {
 
 app.get('/student', function (req, res) {
     url = 'https://www3.reg.cmu.ac.th/regist' + req.query.semester + req.query.year.substring(req.query.year.length - 2) + '/public/result.php?id=' + req.query.id;
-    console.log(url);
+    // console.log(url);
     request(url, function (error, response, html) {
         if (!error) {
             var $ = cheerio.load(html);
@@ -83,9 +83,13 @@ app.get('/student', function (req, res) {
 
 app.get('/cgpa-calculator', function (req, res) {
     url = 'https://www3.reg.cmu.ac.th/regist' + req.query.semester + req.query.year.substring(req.query.year.length - 2) + '/public/result.php?id=' + req.query.id;
-    console.log(url);
+    // console.log(url);
     request(url, function (error, response, html) {
-        if (!error || response.statusCode == 200) {
+        if (response.statusCode == 404) {
+            // console.log("404 Not Found");
+            return res.status(404).json({ status: false, statusCode: 404, statusMessage: "Not Found" });
+        }
+        else if (!error && response.statusCode == 200) {
             var $ = cheerio.load(html);
 
             var courses = [];
@@ -100,6 +104,7 @@ app.get('/cgpa-calculator', function (req, res) {
             });
 
             var coursesJson = {
+                status: true,
                 courseList: []
             };
 
