@@ -85,11 +85,7 @@ app.get('/cgpa-calculator', function (req, res) {
     url = 'https://www3.reg.cmu.ac.th/regist' + req.query.semester + req.query.year.substring(req.query.year.length - 2) + '/public/result.php?id=' + req.query.id;
     // console.log(url);
     request(url, function (error, response, html) {
-        if (response.statusCode == 404) {
-            // console.log("404 Not Found");
-            return res.status(200).json({ status: false, statusCode: 404, statusMessage: "Not Found" });
-        }
-        else if (!error && response.statusCode == 200) {
+        if (!error && response.statusCode == 200) {
             var $ = cheerio.load(html);
 
             var courses = [];
@@ -136,7 +132,8 @@ app.get('/cgpa-calculator', function (req, res) {
                 return res.json();
             }
         } else {
-            return res.status(400).json();
+            // console.log("404 Not Found");
+            return res.status(200).json({ status: false, statusCode: 404, statusMessage: "Not Found" });
         }
     });
 });
