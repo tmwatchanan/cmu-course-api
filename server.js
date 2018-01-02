@@ -97,6 +97,7 @@ app.get('/cgpa-calculator', function (req, res) {
                     courseInformation.push(value);
                 });
                 courses.push(courseInformation);
+                console.log(courseInformation);
             });
 
             var coursesJson = {
@@ -117,6 +118,7 @@ app.get('/cgpa-calculator', function (req, res) {
                 }
                 catch (err) {
                     console.log("err", err);
+                    console.log("error url ->", url);
                     console.log("error course ->", course);
                 }
                 const courseInformation = {
