@@ -87,7 +87,7 @@ app.get('/cgpa-calculator', function (req, res) {
     request(url, function (error, response, html) {
         if (response.statusCode == 404) {
             // console.log("404 Not Found");
-            return res.status(404).json({ status: false, statusCode: 404, statusMessage: "Not Found" });
+            return res.status(200).json({ status: false, statusCode: 404, statusMessage: "Not Found" });
         }
         else if (!error && response.statusCode == 200) {
             var $ = cheerio.load(html);
