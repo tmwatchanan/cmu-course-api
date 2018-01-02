@@ -96,8 +96,10 @@ app.get('/cgpa-calculator', function (req, res) {
                     var value = $(this).text().trim();
                     courseInformation.push(value);
                 });
+                if (courseInformation[0] == "NO." || courseInformation[0] == "LEC") {
+                    return true;
+                }
                 courses.push(courseInformation);
-                console.log(courseInformation);
             });
 
             var coursesJson = {
