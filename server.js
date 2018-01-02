@@ -117,6 +117,7 @@ app.get('/cgpa-calculator', function (req, res) {
                 }
                 catch (err) {
                     console.log("err", err);
+                    console.log("error course ->", course);
                 }
                 const courseInformation = {
                     no: course[0],
