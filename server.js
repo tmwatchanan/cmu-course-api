@@ -127,7 +127,7 @@ app.get('/cgpa-calculator', function (req, res) {
                     no: course[0],
                     courseNo: course[1],
                     title: course[2],
-                    credit: (creditLec == "0" ? creditLab : creditLec)
+                    credit: creditLab+creditLec
                 };
                 coursesJson.courseList.push(courseInformation);
             });
