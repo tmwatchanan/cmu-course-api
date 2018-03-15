@@ -105,34 +105,34 @@ app.get('/enrolled-course', function (req, res) {
         if (!error) {
             var $ = cheerio.load(html, { decodeEntities: false });
 
-            var courses = [];
+            var students = [];
 
             $('html > body > center > div > table > tbody > tr.msan').each(function () {
-                let courseInformation = [];
+                let studentInformation = [];
                 let col_count = 0;
                 $('td', this).each(function () {
                     var value = $(this).text().trim();
-                    courseInformation.push(value);
+                    studentInformation.push(value);
                     col_count++;
                     if (col_count >= 2) return;
                 });
-                console.log(courseInformation)
-                courses.push(courseInformation);
+                console.log(studentInformation)
+                students.push(studentInformation);
             });
 
-            var coursesJson = {
-                courseList: []
+            var studentsJson = {
+                studentList: []
             };
 
-            courses.forEach((course, index) => {
-                const courseInformation = {
+            students.forEach((course, index) => {
+                const studentInformation = {
                     no: course[0],
                     studentId: course[1],
                     // name: course[2],
                 };
-                coursesJson.courseList.push(courseInformation);
+                studentsJson.courseList.push(studentInformation);
             });
-            return res.json(coursesJson);
+            return res.json(studentsJson);
         }
     });
 });
