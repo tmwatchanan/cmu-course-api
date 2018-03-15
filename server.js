@@ -175,18 +175,16 @@ app.get('/class-info', function (req, res) {
                 });
             });
 
-            var coursesJson = {
-                courseList: []
-            };
+            var coursesJson = {};
 
             courses.forEach((course, index) => {
-                const courseInformation = {
-                    room: course[9],
+                coursesJson = {
+                    roomList: course[9],
                     lecturerList: course[10],
                     examDate: course[11],
                     examTime: course[12]
                 };
-                coursesJson.courseList.push(courseInformation);
+                return;
             });
             return res.json(coursesJson);
         }
