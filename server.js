@@ -130,7 +130,7 @@ app.get('/enrolled-course', function (req, res) {
                     studentId: course[1],
                     // name: course[2],
                 };
-                studentsJson.courseList.push(studentInformation);
+                studentsJson.studentList.push(studentInformation);
             });
             return res.json(studentsJson);
         }
