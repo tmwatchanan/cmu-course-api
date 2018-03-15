@@ -116,7 +116,6 @@ app.get('/enrolled-course', function (req, res) {
                     col_count++;
                     if (col_count >= 2) return;
                 });
-                console.log(studentInformation)
                 students.push(studentInformation);
             });
 
@@ -133,6 +132,63 @@ app.get('/enrolled-course', function (req, res) {
                 studentsJson.studentList.push(studentInformation);
             });
             return res.json(studentsJson);
+        }
+    });
+});
+
+app.get('/class-info', function (req, res) {
+    url = 'https://www3.reg.cmu.ac.th/regist' + req.query.semester + req.query.year.substring(req.query.year.length - 2) + '/public/search.php?act=search';
+    request.post({ url: url, form: { op: 'bycourse', s_course1: req.query.courseno, s_lec1: req.query.seclec, s_lab1: req.query.seclab } }, function (error, response, html) {
+        if (!error) {
+            var $ = cheerio.load(html);
+
+            var courses = [];
+
+            $('html > body > div > div > div > details > table > tbody').each(function () {
+                let courseInformation = [];
+                $('tr', this).each(function () {
+                    let col_count = 0;
+                    $('td', this).each(function () {
+                        var value = $(this).text();
+                        let columnValue = value;
+                        if (col_count == 9 || col_count == 10) {
+                            let html_content = $(this).html();
+                            html_content = html_content.replace('<red>', '')
+                            html_content = html_content.replace('</red>', '')
+                            html_content = html_content.replace('<gray>', '')
+                            html_content = html_content.replace('</gray>', '')
+                            let lecturerList = html_content.split('<br>');
+                            const index = lecturerList.indexOf('<b>co-instructor</b>');
+                            lecturerList = lecturerList.filter(function (e) { return e });
+                            lecturerList.forEach(lecturer => {
+                                lecturer = lecturer.replace(/<[\\d\\D]*?>/, '')
+                            });
+                            if (index !== -1) {
+                                lecturerList.splice(index, 1);
+                            }
+                            columnValue = lecturerList;
+                        }
+                        courseInformation.push(columnValue);
+                        col_count++;
+                    });
+                    courses.push(courseInformation);
+                });
+            });
+
+            var coursesJson = {
+                courseList: []
+            };
+
+            courses.forEach((course, index) => {
+                const courseInformation = {
+                    room: course[9],
+                    lecturerList: course[10],
+                    examDate: course[11],
+                    examTime: course[12]
+                };
+                coursesJson.courseList.push(courseInformation);
+            });
+            return res.json(coursesJson);
         }
     });
 });
@@ -183,7 +239,7 @@ app.get('/cgpa-calculator', function (req, res) {
                     no: course[0],
                     courseNo: course[1],
                     title: course[2],
-                    credit: creditLab+creditLec
+                    credit: creditLab + creditLec
                 };
                 coursesJson.courseList.push(courseInformation);
             });
