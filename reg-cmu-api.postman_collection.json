@@ -7,39 +7,39 @@
 	},
 	"item": [
 		{
-			"name": "Course Information",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": ""
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "Enrolled Students in the Course",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": ""
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
 			"name": "Student's Courses",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": ""
+					"raw": "https://reg-cmu-api.herokuapp.com/student?semester=2&year=60&id=570610601",
+					"protocol": "https",
+					"host": [
+						"reg-cmu-api",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"student"
+					],
+					"query": [
+						{
+							"key": "semester",
+							"value": "2",
+							"equals": true
+						},
+						{
+							"key": "year",
+							"value": "60",
+							"equals": true
+						},
+						{
+							"key": "id",
+							"value": "570610601",
+							"equals": true
+						}
+					]
 				},
 				"description": ""
 			},
@@ -52,7 +52,115 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": ""
+					"raw": "https://reg-cmu-api.herokuapp.com/class-info?semester=2&year=60&courseno=261102&seclec=001&seclab=000",
+					"protocol": "https",
+					"host": [
+						"reg-cmu-api",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"class-info"
+					],
+					"query": [
+						{
+							"key": "semester",
+							"value": "2",
+							"equals": true
+						},
+						{
+							"key": "year",
+							"value": "60",
+							"equals": true
+						},
+						{
+							"key": "courseno",
+							"value": "261102",
+							"equals": true
+						},
+						{
+							"key": "seclec",
+							"value": "001",
+							"equals": true
+						},
+						{
+							"key": "seclab",
+							"value": "000",
+							"equals": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Course Information",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://reg-cmu-api.herokuapp.com/course/261102",
+					"protocol": "https",
+					"host": [
+						"reg-cmu-api",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"course",
+						"261102"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Enrolled Students in the Course",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://reg-cmu-api.herokuapp.com/enrolled-course?semester=2&year=60&courseno=261102&seclec=001&seclab=000",
+					"protocol": "https",
+					"host": [
+						"reg-cmu-api",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"enrolled-course"
+					],
+					"query": [
+						{
+							"key": "semester",
+							"value": "2",
+							"equals": true
+						},
+						{
+							"key": "year",
+							"value": "60",
+							"equals": true
+						},
+						{
+							"key": "courseno",
+							"value": "261102",
+							"equals": true
+						},
+						{
+							"key": "seclec",
+							"value": "001",
+							"equals": true
+						},
+						{
+							"key": "seclab",
+							"value": "000",
+							"equals": true
+						}
+					]
 				},
 				"description": ""
 			},
