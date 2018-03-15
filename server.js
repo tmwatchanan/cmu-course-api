@@ -23,11 +23,27 @@ app.get('/course/:courseNo', function (req, res) {
         if (!error) {
             var $ = cheerio.load(html);
             var responseJson = {
+                facultyName: '',
                 courseName: '',
+                courseNameThai: '',
+                courseDescription: '',
+                courseDescriptionThai: '',
                 courseCredit: ''
             };
+            $('#lblFacultyName').filter(function () {
+                responseJson.facultyName = $(this).text();
+            });
             $('#lblCourseTitleEng').filter(function () {
                 responseJson.courseName = $(this).text();
+            });
+            $('#lblCourseTitleTha').filter(function () {
+                responseJson.courseNameThai = $(this).text();
+            });
+            $('#lblCourseDescriptionEng').filter(function () {
+                responseJson.courseDescription = $(this).text();
+            });
+            $('#lblCourseDescriptionTha').filter(function () {
+                responseJson.courseDescriptionThai = $(this).text();
             });
             $('#lblCredit').filter(function () {
                 responseJson.courseCredit = $(this).text().charAt(0);
@@ -73,6 +89,46 @@ app.get('/student', function (req, res) {
                     time: course[8],
                     type: course[9],
                     grade: course[10]
+                };
+                coursesJson.courseList.push(courseInformation);
+            });
+            return res.json(coursesJson);
+        }
+    });
+});
+
+app.get('/enrolled-course', function (req, res) {
+    // https://www3.reg.cmu.ac.th/regist260/public/stdtotal.php?var=maxregist&COURSENO=261102&SECLEC=001&SECLAB=000
+    url = 'https://www3.reg.cmu.ac.th/regist' + req.query.semester + req.query.year.substring(req.query.year.length - 2) + '/public/stdtotal.php?var=maxregist&COURSENO=' + req.query.courseno + '&SECLEC=' + req.query.seclec + '&SECLAB=' + req.query.seclab;
+    // console.log(url);
+    request(url, function (error, response, html) {
+        if (!error) {
+            var $ = cheerio.load(html, { decodeEntities: false });
+
+            var courses = [];
+
+            $('html > body > center > div > table > tbody > tr.msan').each(function () {
+                let courseInformation = [];
+                let col_count = 0;
+                $('td', this).each(function () {
+                    var value = $(this).text().trim();
+                    courseInformation.push(value);
+                    col_count++;
+                    if (col_count >= 2) return;
+                });
+                console.log(courseInformation)
+                courses.push(courseInformation);
+            });
+
+            var coursesJson = {
+                courseList: []
+            };
+
+            courses.forEach((course, index) => {
+                const courseInformation = {
+                    no: course[0],
+                    studentId: course[1],
+                    // name: course[2],
                 };
                 coursesJson.courseList.push(courseInformation);
             });
